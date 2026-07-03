@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <title>Happy Birthday Princess Rithiksha ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- Sound Controller -->
+    <button id="sound-toggle" class="sound-toggle-btn" aria-label="Toggle Sound">
+        <span id="sound-icon">🔇</span>
+    </button>
+
+    <!-- Palette Switcher Toggle -->
+    <button id="palette-toggle" class="palette-toggle-btn" aria-label="Switch Palette">
+        <span>🌙</span>
+    </button>
+
+    <!-- Minimap Navigation -->
+    <div class="minimap-nav">
+        <div class="minimap-dot active" data-stage="0" title="Opening"></div>
+        <div class="minimap-dot" data-stage="1" title="Timeline Vault"></div>
+        <div class="minimap-dot" data-stage="2" title="Life Progress"></div>
+        <div class="minimap-dot" data-stage="3" title="Constellation"></div>
+        <div class="minimap-dot" data-stage="4" title="Digital Gift"></div>
+        <div class="minimap-dot" data-stage="5" title="Universe Wishes"></div>
+        <div class="minimap-dot" data-stage="6" title="Ceremony"></div>
+        <div class="minimap-dot" data-stage="7" title="Princess Status"></div>
+        <div class="minimap-dot" data-stage="8" title="Final Scene"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div id="app" class="app-container">
+        <!-- Canvas for Three.js -->
+        <canvas id="canvas"></canvas>
+
+        <!-- Stage 1: Opening Sequence -->
+        <div id="stage-opening" class="stage stage-opening">
+            <div class="opening-content">
+                <div class="opening-text-container">
+                    <div class="opening-text opening-text-1">Searching timeline...</div>
+                    <div class="opening-text opening-text-2">Scanning memories...</div>
+                    <div class="opening-text opening-text-3">Locating special human...</div>
+                    <div class="opening-text opening-text-4">Birthday detected.</div>
+                </div>
+                <!-- Nickname Prompt Overlay -->
+                <div id="nickname-prompt" class="nickname-prompt-container stage-hidden">
+                    <h2 class="nickname-title">What is your universe name? 🌸</h2>
+                    <div class="nickname-options">
+                        <button class="nick-opt-btn" data-name="Pookie">Pookie 🌸</button>
+                        <button class="nick-opt-btn" data-name="Princess">Princess 👑</button>
+                        <button class="nick-opt-btn" data-name="My Star">My Star ✨</button>
+                        <button class="nick-opt-btn" data-name="Bestie">Bestie 💕</button>
+                    </div>
+                    <div class="nickname-custom">
+                        <input type="text" id="custom-nick" placeholder="Or enter custom name..." maxlength="15">
+                        <button id="custom-nick-submit">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stage 2: Timeline Vault -->
+        <div id="stage-vault" class="stage stage-vault stage-hidden">
+            <div class="vault-container">
+                <div class="vault-glow"></div>
+                <div class="vault-door vault-left"></div>
+                <div class="vault-door vault-right"></div>
+                <div class="vault-content">
+                    <h1 class="vault-title">BIRTHDAY ARCHIVE FOUND</h1>
+                    <button class="vault-button" id="vault-btn">ENTER ARCHIVE</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stage 3: Life Progress System -->
+        <div id="stage-progress" class="stage stage-progress stage-hidden">
+            <div class="progress-container">
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <h1 id="progress-level" class="progress-title">LEVEL 0</h1>
+                        <div class="progress-age" id="progress-age">AGE: 0</div>
+                    </div>
+
+                    <div class="progress-stats">
+                        <div class="stat-block">
+                            <div class="stat-label">YEARS COMPLETED</div>
+                            <div id="progress-years" class="stat-value">0</div>
+                        </div>
+                        <div class="stat-block">
+                            <div class="stat-label">EXPERIENCE POINTS</div>
+                            <div id="progress-xp" class="stat-value">0 XP</div>
+                        </div>
+                    </div>
+
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-label">
+                            <span>LIFE PROGRESS</span>
+                            <span id="progress-percent">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div id="progress-fill" class="progress-fill"></div>
+                            <div class="progress-glow"></div>
+                        </div>
+                    </div>
+
+                    <!-- Universe of Reasons Card Deck Widget -->
+                    <div class="reasons-deck">
+                        <div class="reasons-header">REASONS WHY YOU ARE THE BEST✨</div>
+                        <div class="reasons-card" id="reasons-card">
+                            <div class="reasons-card-inner">
+                                <div class="reasons-card-front">
+                                    <span>Tap to reveal sweet reason #1 🌸</span>
+                                </div>
+                                <div class="reasons-card-back" id="reasons-text">
+                                    You make the universe brighter just by being in it.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="progress-button" id="progress-btn">CONTINUE TO MEMORIES</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stage 4: Memory Constellation -->
+        <div id="stage-memories" class="stage stage-memories stage-hidden">
+            <div class="memories-header">
+                <h1>MEMORY CONSTELLATION</h1>
+                <p>Tap or drag to explore memories</p>
+            </div>
+            <div class="constellation-wrapper">
+                <canvas id="constellation-canvas"></canvas>
+                <div id="memories-container" class="memories-container"></div>
+            </div>
+            <div id="memory-modal" class="memory-modal stage-hidden">
+                <div class="memory-modal-backdrop"></div>
+                <div class="memory-modal-content">
+                    <button id="memory-close" class="memory-close">×</button>
+                    <div id="memory-image" class="memory-image"></div>
+                    <div id="memory-caption" class="memory-caption"></div>
+                </div>
+            </div>
+            <button class="navigation-button" id="memories-btn">VISIT GIFT CHAMBER</button>
+        </div>
+
+        <!-- Stage 5: Digital Gift Chamber -->
+        <div id="stage-gifts" class="stage stage-gifts stage-hidden">
+            <div class="gifts-header">
+                <h1>GIFT CHAMBER</h1>
+                <p>Three gifts await your discovery</p>
+            </div>
+            <div class="gifts-container">
+                <div class="gift-capsule" id="gift-1">
+                    <div class="gift-capsule-inner">
+                        <div class="gift-icon">💌</div>
+                        <div class="gift-label">MESSAGE</div>
+                    </div>
+                </div>
+                <div class="gift-capsule" id="gift-2">
+                    <div class="gift-capsule-inner">
+                        <div class="gift-icon">✨</div>
+                        <div class="gift-label">MEMORY</div>
+                    </div>
+                </div>
+                <div class="gift-capsule" id="gift-3">
+                    <div class="gift-capsule-inner">
+                        <div class="gift-icon">🎁</div>
+                        <div class="gift-label">SURPRISE</div>
+                    </div>
+                </div>
+            </div>
+            <div id="gift-modal" class="gift-modal stage-hidden">
+                <div class="gift-modal-backdrop"></div>
+                <div class="gift-modal-content">
+                    <button id="gift-close" class="gift-close">×</button>
+                    <div id="gift-content" class="gift-content"></div>
+                </div>
+            </div>
+            <button class="navigation-button" id="gifts-btn">RECEIVE WISHES</button>
+        </div>
+
+        <!-- Stage 6: Wishes From Universe -->
+        <div id="stage-wishes" class="stage stage-wishes stage-hidden">
+            <div class="wishes-header">
+                <h1>WISHES FROM THE UNIVERSE</h1>
+                <p>Messages arriving from across the cosmos</p>
+            </div>
+            <div id="wishes-container" class="wishes-container"></div>
+            <!-- Wishing Well Form -->
+            <div class="wishing-well-form">
+                <input type="text" id="wish-input" placeholder="Type your birthday wish to the universe..." maxlength="100">
+                <button id="wish-submit" class="wish-submit-btn">CAST WISH</button>
+            </div>
+            <button class="navigation-button" id="wishes-btn">COMPLETION CEREMONY</button>
+        </div>
+
+        <!-- Stage 7: Year Completion Ceremony -->
+        <div id="stage-ceremony" class="stage stage-ceremony stage-hidden">
+            <div class="ceremony-container">
+                <div class="ceremony-particles"></div>
+                <div class="ceremony-content">
+                    <div class="ceremony-text ceremony-text-1">
+                        <span class="ceremony-counter" data-target="365">0</span> DAYS COMPLETED
+                    </div>
+                    <div class="ceremony-ring">
+                        <!-- Interactive Blowing Candle -->
+                        <div class="interactive-candle" id="ceremony-candle">
+                            <div class="candle-flame" id="candle-flame"></div>
+                            <div class="candle-wick"></div>
+                            <div class="candle-wax"></div>
+                        </div>
+                    </div>
+                    <div class="ceremony-text ceremony-text-2">NEW CHAPTER UNLOCKED</div>
+                </div>
+            </div>
+            <button class="navigation-button" id="ceremony-btn">PRINCESS STATUS</button>
+        </div>
+
+        <!-- Stage 8: Legend Status -->
+        <div id="stage-legend" class="stage stage-legend stage-hidden">
+            <div class="legend-container">
+                <div class="legend-content">
+                    <div class="legend-header">⭐ PRINCESS STATUS UNLOCKED ⭐</div>
+                    <div class="princess-certificate">
+                        <div class="certificate-border">
+                            <div class="certificate-content">
+                                <div class="certificate-title">A NEW CHAPTER BEGINS</div>
+                                <div id="legend-name" class="certificate-name">VALUED HUMAN</div>
+                                <div class="certificate-details">
+                                    <div class="detail-row">
+                                        <span class="detail-label">AGE MILESTONE:</span>
+                                        <span id="legend-age" class="detail-value">0 YEARS</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="detail-label">DATE CELEBRATED:</span>
+                                        <span id="legend-date" class="detail-value">TODAY</span>
+                                    </div>
+                                </div>
+                                <div class="certificate-footer">ANOTHER BEAUTIFUL YEAR BEGINS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="legend-actions">
+                <button class="export-button" id="export-btn">💾 DOWNLOAD CERTIFICATE</button>
+            </div>
+            <button class="navigation-button" id="legend-btn">FINAL SCENE</button>
+        </div>
+
+        <!-- Stage 9: Final Scene -->
+        <div id="stage-final" class="stage stage-final stage-hidden">
+            <div class="final-container">
+                <div class="final-text final-text-1">
+                    Happy Birthday, 
+                    Princess 👑
+                </div>
+                <div class="final-text final-text-2">
+                    You are one of the most wonderful people
+                    I have ever met.
+                </div>
+                <div class="final-text final-text-3">
+                    Thank you for being my best friend.
+                </div>
+                <div class="final-text final-text-4">
+                    May your life always be filled with
+                    happiness, success and beautiful memories.
+                </div>
+            </div>
+        </div>
+    </div>
+    <audio id="bgMusic" loop>
+    <source src="assets/music/birthday.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.addEventListener("click", function () {
+    const music = document.getElementById("bgMusic");
+    if (music.paused) {
+        music.volume = 0.4;
+        music.play();
+    }
+}, { once: true });
+</script>
+
+    <script src="script.js"></script>
+</body>
+</html>
