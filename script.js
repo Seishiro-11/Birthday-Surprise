@@ -9,11 +9,10 @@ const CONFIG = {
     // Add birthday messages
     MESSAGES: [
         { text: "Happy Birthday, Princess! 🎂!", author: "With Best Wishes  ❤️" },
-        { text: "Happy Birthday, Princess! 🎂!", author: "With Best Wishes  ❤️" },
-        { text: "Thank you for being the most caring, kind, and wonderful friend anyone could ask for!", author: "Kishor" },
-        { text: "No matter where life takes us, you'll always have a special place in my heart as my best friend!", author: "Forever Best Friend" },
-        { text: "Keep smiling, keep shining, and keep being the amazing person you are. The world is brighter because of you!", author: "Your Princess Supporter" },
-        { text: "Wishing you endless happiness, good health, success, and unforgettable memories. Happy Birthday, Princess! 👑", author: "Kishor" },
+        { text: "En life-la ivlo caring, kind, wonderful friend-ah irukkuradhukku unakku evlo thanks sonnalum podhadhu... Thank you for everything! 💕✨", author: "Kishor" },
+        { text: "Namma journey enga ponaalum, en heart-la un idam eppovume maaradhu... nee en best friend dhaan. ✨💞", author: "Forever Best Friend" },
+        { text: "Eppovume sirichitte iru, shine pannitte iru, nee ippo irukkura amazing person ah appadiye iru... un presence nala dhaan indha world innum brighter ah beautiful ah irukku. ☀️❤️✨", author: "Your Best Friend" },
+        { text: "Un life full-ah endless happiness, nalla health, periya success, marakka mudiyadha beautiful memories ellam nirainjirukkanum. Eppovume ippadiye sirichitte iru. Happy Birthday, Princess! 👑❤️🎉✨", author: "Kishor" },
     ],
 };
 
@@ -1101,11 +1100,11 @@ function setupNicknamePrompt() {
 }
 
 const reasonsList = [
-    "Your smile makes even the cloudiest days feel like warm sunshine. ☀️",
+    "Un smile paatha, cloudiest day kooda warm sunshine maari maaridudhu. ☀️✨",
     "You have the kindest heart and always make everyone feel loved and safe. 💕",
-    "You are incredibly smart, creative, and can achieve absolutely anything. 👑",
-    "The entire world is a happier, more beautiful place with you in it. 🌸",
-    "You are completely unique, and I am so lucky to have you in my universe. ✨"
+    "Nee romba smart, creative... un mela nambikkai vachuko, nee nenacha edhaiyum kandippa achieve pannuva. 👑❤️✨",
+    "Nee indha world-la irukkuradhe oru gift maari... un presence nala indha ulagam innum happya beautiful ah irukku. 🌸❤️✨",
+    "Nee unmaiyave one and only... unna en universe-la vachirukkuradhu enakku kidaicha romba azhagana gift. ✨❤️"
 ];
 let currentReasonIdx = 0;
 
